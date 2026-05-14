@@ -6,7 +6,7 @@ RUN pacman -Syu --needed --noconfirm pacman-contrib git
 
 # Setup user
 RUN useradd -m builder && \
-    mkdir -p /home/builder/bin \
+    mkdir -p /home/builder/bin && \
     echo 'builder ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 WORKDIR /home/builder
 USER builder
