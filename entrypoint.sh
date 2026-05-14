@@ -47,11 +47,6 @@ if [ "$INPUT_NAMCAP" = 'true' ]; then
 	sudo pacman -Syu --needed --noconfirm namcap
 fi
 
-if [ "$INPUT_SIGNING_KEY" ] ; then
-	glgrp "Installing gnupg"
-	sudo pacman -Syu --needed --noconfirm gnupg
-fi
-
 if [ "$INPUT_PGPKEYS" ]; then
 	glgrp "Receiving PGP keys"
 	for key in ${INPUT_PGPKEYS//,/$'\n'}; do
