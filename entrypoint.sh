@@ -25,7 +25,7 @@ mkdir -p "$BUILDDIR"
 sudo chmod -R 0777 /etc/pacman.conf "$GITHUB_ENV" "$GITHUB_WORKSPACE"
 
 # The default alpm user can't read our custom file-based databases...
-sed -i 's/DownloadUser = alpm/DownloadUser = builder/g' /etc/pacman.conf
+sudo sed -i 's/DownloadUser = alpm/DownloadUser = builder/g' /etc/pacman.conf
 
 cat <<-EOMPC > ~/.makepkg.conf
 	NPROC="$(nproc)"
