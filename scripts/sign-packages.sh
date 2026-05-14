@@ -13,6 +13,7 @@ SIGNING_KEY_PASSWORD="$3"
 # Constants
 
 GNUPGHOME="${GNUPGHOME:-$(mktemp)}"
+GPG_TTY=$(tty)
 SIGNING_KEY_ID=''
 TZ='UTC'
 
