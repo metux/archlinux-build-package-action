@@ -15,8 +15,8 @@ REPO_SIGLEVEL="$4"
 url_exists() {
 	set +e
 	curl -I "$1" 1>/dev/null 2>&1
+	echo "RET: $?"
 	RET=$?
-	echo "RET: $RET"
 	set -e
 	return $RET
 }
