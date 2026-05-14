@@ -56,7 +56,7 @@ inputs:
   signing-key:
     description: The OpenPGP key to sign the packages
     type: string
-  signig-key-password:
+  signing-key-password:
     description: The password of the signing key
     type: string
 
