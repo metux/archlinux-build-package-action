@@ -1,0 +1,122 @@
+name: Arch Linux packaging action
+description: GitHub Action to create and modify packages for Arch Linux
+author: callmetango
+
+inputs:
+  path:
+    description: Location for this action to run
+
+  # Updates to the PKGBUILD
+  pkgver:
+    description: Set pkgver of the PKGBUILD
+  pkgrel:
+    description: Set pkgrel of the PKGBUILD
+  updpkgsums:
+    description: Update the checksums of the PKGBUILD
+    type: boolean
+    default: false
+  srcinfo:
+    description: Generate new .SRCINFO
+    type: boolean
+    default: false
+
+  flags:
+    description: Extra flags for makepkg
+    default: '-cfs --noconfirm'
+    deprecationMessage: use 'makepkg-opts' instead
+  makepkg-opts:
+    description: Options to pass to makepkg
+    default: '-cfs --noconfirm'
+
+  namcap:
+    description: Validate package with namcap
+    type: boolean
+    default: true
+  namcap-opts:
+    description: Options to pass to namcap
+    type: string
+    default: '-i'
+  aur:
+    description: Resolve the PKGBUILD dependencies using yay
+    type: boolean
+    default: false
+
+  # PGP key handling
+  update-archlinux-keyring:
+    description: Update the archlinux-keyring package
+    type: boolean
+    default: true
+  pgpkeys:
+    description: Comma-separated PGP keys
+    type: string
+  pgpkeyserver:
+    description: PGP key server
+    type: string
+    default: hkps://keyserver.ubuntu.com
+  signing-key:
+    description: The OpenPGP key to sign the packages
+    type: string
+  signig-key-password:
+    description: The password of the signing key
+    type: string
+
+  # Repository handling
+  custom-repo-name:
+    description: name of the custom repository
+    default: ''
+  custom-repo-url:
+    description: URL of the custom repository
+    default: ''
+  custom-repo-key:
+    description: PGP key of the custom repository\'s signing key (ASCII armored)
+    default: ''
+  custom-repo-keyid:
+    description: PGP key ID of the custom repository\'s signing key
+    default: ''
+  custom-repo-siglevel:
+    description: SigLevel of the custom repository
+    default: Required TrustedOnly
+
+  dependencies-path:
+    description: A directory path containing packages required to built the PKGBUILD
+    type: string
+
+  repo-add-path:
+    description: |
+      path of the repository to add the package to in the form of <repo-name>.db.
+      To enable compression, you can specify an extension like '.tar.gz' or '.tar.zst'.
+    type: string
+  repo-add-opts:
+    description: Options to pass to repo-add. See `man 8 repo-add` for more.
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.path }}
+    - ${{ inputs.pkgver }}
+    - ${{ inputs.pkgrel }}
+    - ${{ inputs.updpkgsums }}
+    - ${{ inputs.srcinfo }}
+    - ${{ inputs.flags }}
+    - ${{ inputs.namcap }}
+    - ${{ inputs.aur }}
+    - ${{ inputs.pgpkeys }}
+    - ${{ inputs.pgpkeyserver }}
+  env:
+    INPUT_MAKEPKG_OPTS: ${{ inputs.makepkg-opts }}
+    INPUT_NAMCAP_OPTS: ${{ inputs.namcap-opts }}
+    INPUT_UPDATE_ARCHLINUX_KEYRING: ${{ inputs.update-archlinux-keyring }}
+    INPUT_SIGNING_KEY: ${{ inputs.signing-key }}
+    INPUT_SIGNING_KEY_PASSWORD: ${{ inputs.signig-key-password }}
+
+    INPUT_CUSTOM_REPO_NAME: ${{ inputs.custom-repo-name }}
+    INPUT_CUSTOM_REPO_URL: ${{ inputs.custom-repo-url }}
+    INPUT_CUSTOM_REPO_KEY: ${{ inputs.custom-repo-key }}
+    INPUT_CUSTOM_REPO_KEYID: ${{ inputs.custom-repo-keyid }}
+    INPUT_CUSTOM_REPO_SIGLEVEL: ${{ inputs.custom-repo-siglevel }}
+
+    INPUT_DEPENDENCIES_PATH: ${{ inputs.dependencies-path }}
+
+    INPUT_REPO_ADD_PATH: ${{ inputs.repo-add-path }}
+    INPUT_REPO_ADD_OPTS: ${{ inputs.repo-add-opts }}
