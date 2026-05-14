@@ -13,14 +13,19 @@ REPO_SIGLEVEL="$4"
 # Functions
 
 url_exists() {
+	set +e
 	curl -I "$1" 1>/dev/null 2>&1
-	return $?
+	RET=$?
+	set -e
+	return $RET
 }
 
 
 # Main
 
-if [ url_exists "$REPO_URL/$REPO_ARCH/$REPO_NAME.db" -ne 0 ] ; then
+RET=$(url_exists "$REPO_URL/$REPO_ARCH/$REPO_NAME.db")
+echo "RET: $RET"
+if [ $RET -ne 0 ] ; then
 	echo "package database of custom repo not found, skipping"
 	exit 0
 fi
