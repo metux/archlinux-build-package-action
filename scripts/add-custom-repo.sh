@@ -15,7 +15,6 @@ REPO_SIGLEVEL="$4"
 url_exists() {
 	set +e
 	curl -I "$1" 1>/dev/null 2>&1
-	echo "RET: $?"
 	RET=$?
 	set -e
 	return $RET
@@ -24,9 +23,8 @@ url_exists() {
 
 # Main
 
-retval=$(url_exists "$REPO_URL/$REPO_ARCH/$REPO_NAME.db")
-echo "retval: $retval"
-if [ ! $retval ] ; then
+url_exists "$REPO_URL/$REPO_ARCH/$REPO_NAME.db"
+if [ $? -ne 0 ] ; then
 	echo "package database of custom repo not found, skipping"
 	exit 0
 fi
