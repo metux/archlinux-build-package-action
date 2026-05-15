@@ -16,7 +16,7 @@ fi
 mkdir -p "$REPO_PATH"
 cd "$REPO_PATH" || exit
 
-repo-add dependencies.db.tar "$DEPS_PATH"/*.pkg.*
+repo-add dependencies.db.tar "$DEPS_PATH"/*.pkg.{tar,tar.bz2,tar.gz,tar.lrz,tar.lz,tar.lz4,tar.lzo,tar.xz,tar.zst,tar.Z}
 tee -a /etc/pacman.conf <<- EOF
 
 	[dependencies]
