@@ -10,7 +10,7 @@ REPO_PATH="${HOME}/work/${2:-dependencies}"
 mkdir -p "$REPO_PATH"
 cd "$REPO_PATH" || exit
 
-find "$DEPS_PATH" -maxdepth 1 -name '*.pkg.* -not -name '*.pkg.*.sig' \
+find "$DEPS_PATH" -maxdepth 1 -name '*.pkg.tar* -not -name '*.pkg.*.sig' \
 	-exec sh -c 'for PKG in "$@"; do repo-add dependencies.db.tar "$PKG"; done' - {} +
 
 if [ ! -e depedencies.db.tar ]; then
