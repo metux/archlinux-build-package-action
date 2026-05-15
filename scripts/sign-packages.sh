@@ -32,20 +32,17 @@ if [ ! "$SIGNING_KEY_ID" ] ; then
 fi
 
 printf '%s\n' "$SIGNING_KEY" | gpg --batch --import
-echo "retval of import: $?"
 
 ls "$1"/*.pkg.* > packages.csv
 
-echo "SIGNING_KEY_PASSWORD: $SIGNING_KEY_PASSWORD"
-
 while IFS= read -r PKG ; do
 	if [ "$SIGNING_KEY_PASSWORD" ]; then
-		echo "$SIGNING_KEY_PASSWORD" | gpg --batch --no-tty --passphrase --passphrase-fd 0 \
+		echo "$SIGNING_KEY_PASSWORD" | gpg --batch --passphrase --passphrase-fd 0 \
 			--pinentry-mode loopback \
 			--default-key "$SIGNING_KEY_ID" --detach-sign \
 			--output "$PKG".sig --sign "$PKG"
 	else
-		gpg --batch --no-tty \
+		gpg --batch \
 			--default-key "$SIGNING_KEY_ID" --detach-sign \
 			--output "$PKG".sig --sign "$PKG"
 	fi
