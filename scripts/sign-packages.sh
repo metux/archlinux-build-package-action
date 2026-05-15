@@ -36,7 +36,7 @@ echo "retval of import: $?"
 
 ls "$1"/*.pkg.* > packages.csv
 
-test "$SIGNING_KEY_PASSWORD" || echo "no signing password given"
+echo "SIGNING_KEY_PASSWORD: $SIGNING_KEY_PASSWORD"
 
 while IFS= read -r PKG ; do
 	if [ "$SIGNING_KEY_PASSWORD" ]; then
