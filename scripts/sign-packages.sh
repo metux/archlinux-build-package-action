@@ -4,6 +4,7 @@ echo "HERE sign-packages.sh"
 
 set -e -u
 
+
 # Arguments
 
 # $1: path to packages
@@ -12,15 +13,13 @@ set -e -u
 SIGNING_KEY="$2"
 SIGNING_KEY_PASSWORD="$3"
 
-echo "determining tty"
-echo "TTY: $(tty)"
 
 # Constants
 
 GNUPGHOME="${GNUPGHOME:-$(mktemp)}"
-GPG_TTY=$(tty)
 SIGNING_KEY_ID=''
 TZ='UTC'
+
 
 # Main
 
@@ -38,12 +37,12 @@ ls "$1"/*.pkg.* > packages.csv
 
 while IFS= read -r PKG ; do
 	if [ "$SIGNING_KEY_PASSWORD" ]; then
-		echo "$SIGNING_KEY_PASSWORD" | gpg --batch --passphrase --passphrase-fd 0 \
+		echo "$SIGNING_KEY_PASSWORD" | gpg --batch --no-tty --passphrase --passphrase-fd 0 \
 			--pinentry-mode loopback \
 			--default-key "$SIGNING_KEY_ID" --detach-sign \
 			--output "$PKG".sig --sign "$PKG"
 	else
-		gpg --batch \
+		gpg --batch --no-tty \
 			--default-key "$SIGNING_KEY_ID" --detach-sign \
 			--output "$PKG".sig --sign "$PKG"
 	fi
