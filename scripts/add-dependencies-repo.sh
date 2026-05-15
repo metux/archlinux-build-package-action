@@ -10,14 +10,12 @@ REPO_PATH="${HOME}/work/${2:-dependencies}"
 mkdir -p "$REPO_PATH"
 cd "$REPO_PATH" || exit
 
-find "$DEPS_PATH" -maxdepth 1 -name '*.pkg.tar*' -print -quit
+find "$DEPS_PATH" ! -name '*.pkg.tar*.sig' -prune -name '*.pkg.tar*' \
+	-exec sh -c "cp \"$@\" $REPO_PATH" sh {} +
 if [ $? -ne 0 ] ; then
 	echo "no dependency packages found, skipping"
 	exit 0
 fi
-
-cp -fv "$DEPS_PATH"/*.pkg.tar* "$REPO_PATH"/
-find . -name '*.pkg.tar*.sig' -exec sh -c 'rm -rf "$@"' sh {} +
 
 repo-add dependencies.db.tar *.pkg.*
 
