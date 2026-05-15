@@ -17,7 +17,7 @@ if [ $? -ne 0 ] ; then
 fi
 
 cp -fv "$DEPS_PATH"/*.pkg.tar* "$REPO_PATH"/
-rm -rf *.pkg.tar*.sig
+find . -name '*.pkg.tar*.sig' -exec sh -c 'rm -rf "$@"' sh {} +
 
 repo-add dependencies.db.tar *.pkg.*
 
