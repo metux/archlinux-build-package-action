@@ -32,6 +32,7 @@ if [ ! "$SIGNING_KEY_ID" ] ; then
 fi
 
 printf '%s\n' "$SIGNING_KEY" | gpg --batch --import
+echo "retval of import: $?"
 
 ls "$1"/*.pkg.* > packages.csv
 
