@@ -13,7 +13,7 @@ cd "$REPO_PATH" || exit
 find "$DEPS_PATH" -maxdepth 1 -name '*.pkg.tar*' -not -name '*.pkg.*.sig' \
 	-exec sh -c 'for PKG in "$@"; do repo-add dependencies.db.tar "$PKG"; done' - {} +
 
-if [ ! -e depedencies.db.tar ]; then
+if [ ! -e dependencies.db.tar ]; then
 	echo "no dependency packages found, skipping"
 	exit 0
 fi
