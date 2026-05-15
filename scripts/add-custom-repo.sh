@@ -10,17 +10,6 @@ REPO_URL="$3"
 REPO_SIGLEVEL="$4"
 
 
-# Functions
-
-url_exists() {
-	set +e
-	curl -I "$1" 1>/dev/null 2>&1
-	RET=$?
-	set -e
-	return $RET
-}
-
-
 # Main
 
 set +e
