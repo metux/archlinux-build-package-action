@@ -14,7 +14,7 @@ REPO_SIGLEVEL="$4"
 
 set +e
 DB_URL="${REPO_URL}/${REPO_ARCH}/${REPO_NAME}.db"
-curl --silent --head "$DB_URL"
+curl --head "$DB_URL" 1>/dev/null 2>&1
 if [ $? -ne 0 ] ; then
 	echo "package database of custom repo not found, skipping"
 	exit 0
