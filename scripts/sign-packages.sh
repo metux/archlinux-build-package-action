@@ -1,14 +1,12 @@
 #!/bin/sh
 
-echo "HERE sign-packages.sh"
-
 set +e -u
 
 
 # Arguments
 
 # $1: path to packages
-SIGNING_KEY="$2" # ascii armored key to use
+SIGNING_KEY="$2" # ascii armored key for signing
 SIGNING_KEY_PASSWORD="$3" # optional: key password
 
 
