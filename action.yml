@@ -108,7 +108,7 @@ runs:
     INPUT_NAMCAP_OPTS: ${{ inputs.namcap-opts }}
     INPUT_UPDATE_ARCHLINUX_KEYRING: ${{ inputs.update-archlinux-keyring }}
     INPUT_SIGNING_KEY: ${{ inputs.signing-key }}
-    INPUT_SIGNING_KEY_PASSWORD: ${{ inputs.signig-key-password }}
+    INPUT_SIGNING_KEY_PASSWORD: ${{ inputs.signing-key-password }}
 
     INPUT_CUSTOM_REPO_NAME: ${{ inputs.custom-repo-name }}
     INPUT_CUSTOM_REPO_URL: ${{ inputs.custom-repo-url }}
