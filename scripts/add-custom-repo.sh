@@ -23,8 +23,8 @@ url_exists() {
 
 # Main
 
-FULL_URL="${REPO_URL}/${REPO_ARCH}/${REPO_NAME}.db"
-if [ ! curl -I "$1" 1>/dev/null 2>&1 ] ; then
+DB_URL="${REPO_URL}/${REPO_ARCH}/${REPO_NAME}.db"
+if [ ! curl --head --silent "$DB_URL" ] ; then
 	echo "package database of custom repo not found, skipping"
 	exit 0
 fi
