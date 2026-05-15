@@ -16,7 +16,7 @@ if [ $? -ne 0 ] ; then
 	exit 0
 fi
 
-cp -fv "DEPS_PATH"/*.pkg.tar* "$REPO_PATH"/
+cp -fv "$DEPS_PATH"/*.pkg.tar* "$REPO_PATH"/
 rm -rf *.pkg.tar*.sig
 
 repo-add dependencies.db.tar *.pkg.*
