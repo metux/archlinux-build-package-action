@@ -114,7 +114,7 @@ cd "$BUILDDIR"
 
 if [ "$INPUT_MAKEPKG_OPTS" ]; then
 	glgrp "Running makepkg with options"
-	cp "$SRCDIR"/PKGBUILD ./
+	cp -R "$SRCDIR"/* ./
 	# shellcheck disable=2086
 	makepkg $INPUT_MAKEPKG_OPTS
 fi
