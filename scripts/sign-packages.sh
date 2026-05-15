@@ -1,14 +1,19 @@
 #!/bin/sh
 
+echo "HERE sign-packages.sh"
+
 set -e -u
 
-# script dev setup
+# Arguments
 
 # $1: path to packages
 # $2: ascii armored key to use
 # $3: optional: key password
 SIGNING_KEY="$2"
 SIGNING_KEY_PASSWORD="$3"
+
+echo "determining tty"
+echo "TTY: $(tty)"
 
 # Constants
 
