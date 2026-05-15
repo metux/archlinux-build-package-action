@@ -2,7 +2,7 @@
 
 echo "HERE sign-packages.sh"
 
-set -e -u
+set +e -u
 
 
 # Arguments
