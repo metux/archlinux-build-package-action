@@ -8,10 +8,8 @@ set +e -u
 # Arguments
 
 # $1: path to packages
-# $2: ascii armored key to use
-# $3: optional: key password
-SIGNING_KEY="$2"
-SIGNING_KEY_PASSWORD="$3"
+SIGNING_KEY="$2" # ascii armored key to use
+SIGNING_KEY_PASSWORD="$3" # optional: key password
 
 
 # Constants
