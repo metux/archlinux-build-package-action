@@ -11,7 +11,7 @@ mkdir -p "$REPO_PATH"
 cd "$REPO_PATH" || exit
 
 find "$DEPS_PATH" -maxdepth 1 -name '*.pkg.tar*' -print -quit
-if [ $? -ne 0] ; then
+if [ $? -ne 0 ] ; then
 	echo "no dependency packages found, skipping"
 	exit 0
 fi
