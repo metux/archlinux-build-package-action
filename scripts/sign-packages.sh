@@ -23,8 +23,6 @@ TZ='UTC'
 
 # Main
 
-echo "Importing key"
-
 if [ ! "$SIGNING_KEY_ID" ] ; then
 	SIGNING_KEY_ID="$( \
 		printf '%s\n' "$SIGNING_KEY" \
@@ -37,7 +35,7 @@ printf '%s\n' "$SIGNING_KEY" | gpg --batch --import
 
 ls "$1"/*.pkg.* > packages.csv
 
-echo "Signing key"
+test "$SIGNING_KEY_PASSWORD" || echo "no signing password given"
 
 while IFS= read -r PKG ; do
 	if [ "$SIGNING_KEY_PASSWORD" ]; then
